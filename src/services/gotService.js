@@ -13,54 +13,75 @@ export default class GotService {
     return await res.json();
   }
 
-  getAllCharacters() {
-    return this.getResource(`/characters?page=5&pageSize=10`);
+  async getAllCharacters() {
+    const res = await this.getResource(`/characters?page=5&pageSize=10`);
+    return res.map(this._transformCharacter);
   }
 
-  getCharacter(id) {
-    return this.getResource(`/characters/${id}`);
+  async getCharacter(id) {
+    const character = await this.getResource(`/characters/${id}`);
+    return this._transformCharacter(character);
   }
 
-  getAllBooks() {
-    return this.getResource(`/books/`);
+  async getAllBooks() {
+    const books = await this.getResource(`/books/`);
+    return books.map(this._transformCharacter);
   }
 
-  getBook(id) {
-    return this.getResource(`/books/${id}`);
+  async getBook(id) {
+    const book = await this.getResource(`/books/${id}`);
+    return this._transformCharacter(book);
   }
   
-  getAllHouses() {
-    return this.getResource(`/houses/`);
+  async getAllHouses() {
+    const houses = await this.getResource(`/houses/`);
+    return houses.map(this._transformCharacter);
   }
 
-  getHouse(id) {
-    return this.getResource(`/houses/${id}`);
+  async getHouse(id) {
+    const house = await this.getResource(`/houses/${id}`);
+    return this._transformCharacter(house); 
+  }
+
+  _transformCharacter(char) {
+
+    const nm = char.name === '' ? char.name = 'NO DATA!!!' : char.name;      
+      
+    const gnd = char.gender === '' ? char.gender = 'NO DATA!!!' : char.gender; 
+
+    const brn = char.born === '' ? char.born = 'NO DATA!!!' : char.born;  
+
+    const dd = char.died === '' ? char.died = 'NO DATA!!!' : char.died;
+        
+    const cult = char.culture === '' ? char.culture = 'NO DATA!!!' : char.culture;        
+
+    return {
+      name: nm,
+      gender: gnd,
+      born: brn,
+      died: dd,
+      culture: cult      
+    }
+  }
+
+  _transformHouse(house) {
+    return {
+      name: house.name,
+      region: house.region,
+      words: house.words,
+      titles: house.titles,
+      overlord: house.overlord,
+      ancestralWeapons: house.ancestralWeapons
+    }
+  }
+
+  _transformBook(book) {
+    return {
+      name: book.name,
+      numberOfPages: book.numberOfPages,
+      publiser: book.publiser,
+      released: book.released
+    }
   }
 
 }
-
-const got = new GotService();
-
-got.getAllCharacters() 
-  .then(res => {
-    res.forEach( item => console.log(item.name));
-  });
-
-got.getCharacter(10)
-  .then(res => console.log(res)); 
-
-got.getAllBooks() 
-  .then(res => {
-    res.forEach( item => console.log(item.name));
-  });
-
-got.getBook(10)
-  .then(res => console.log(res)); 
-
-got.getAllHouses() 
-  .then(res => {
-    res.forEach( item => console.log(item.name));
-  });
-
-got.getHouse(10)
-  .then(res => console.log(res));
