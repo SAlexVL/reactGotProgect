@@ -10,7 +10,8 @@ export default class ItemList extends Component {
 
     state = {
         charList: null,
-        error: false
+        error: false,
+        loading: true
     }
 
     onError = (err) => {
@@ -45,21 +46,27 @@ export default class ItemList extends Component {
 
     render() {
 
-        const {charList, error} = this.state;
+        const {charList, error, loading} = this.state;
+      
+        const items = this.renderItems(charList); 
 
-        const errorMessage = error ? <ErrorMessage/> : null;
-
-        if (!charList) {
-            return <ErrorMessage/>
-        }
-       
-        const items = this.renderItems(charList);       
+        const content = error ? <ErrorMessage/> : loading ? <Spinner/> : items;              
 
         return (
             <ul className="item-list list-group">
-                {errorMessage}
+                {content}
                 {items}
             </ul>
-        );
+);
+        
+        // const errorMessage = error ? <ErrorMessage/> : null;
+        // const spinner = loading ? <Spinner/> : null;
+
+        // const items = this.renderItems(charList);
+
+        // if (!charList) {
+        //     return <Spinner/>
+        // }              
+
     }
 }
