@@ -28,7 +28,6 @@ export default class ItemList extends Component {
                 })
             })
             .catch(this.onError)
-            // this.foo.bar = 0;
     }
 
     renderItems(arr) {
@@ -48,12 +47,12 @@ export default class ItemList extends Component {
 
         const {charList, error} = this.state;
 
-        if (!charList) {
-            return <Spinner/>
-        }
-
         const errorMessage = error ? <ErrorMessage/> : null;
 
+        if (!charList) {
+            return <ErrorMessage/>
+        }
+       
         const items = this.renderItems(charList);       
 
         return (
