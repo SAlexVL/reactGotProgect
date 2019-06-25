@@ -25,7 +25,8 @@ export default class ItemList extends Component {
         this.gotService.getAllCharacters()
             .then( (charList) => {
                 this.setState({
-                    charList
+                    charList,
+                    loading: false
                 })
             })
             .catch(this.onError)
@@ -47,26 +48,14 @@ export default class ItemList extends Component {
     render() {
 
         const {charList, error, loading} = this.state;
-      
-        const items = this.renderItems(charList); 
-
-        const content = error ? <ErrorMessage/> : loading ? <Spinner/> : items;              
-
+               
+        const content = error ? <ErrorMessage/> : loading ? <Spinner/> : this.renderItems(charList);  
+        
         return (
             <ul className="item-list list-group">
                 {content}
-                {items}
             </ul>
-);
-        
-        // const errorMessage = error ? <ErrorMessage/> : null;
-        // const spinner = loading ? <Spinner/> : null;
-
-        // const items = this.renderItems(charList);
-
-        // if (!charList) {
-        //     return <Spinner/>
-        // }              
+);       
 
     }
 }
