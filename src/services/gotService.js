@@ -24,8 +24,8 @@ export default class GotService {
   }
 
   async getAllBooks() {
-    const books = await this.getResource(`/books/`);
-    return books.map(this._transformCharacter);
+    const res = await this.getResource(`/books/`);
+    return res.map(this._transformCharacter);
   }
 
   async getBook(id) {
@@ -34,8 +34,8 @@ export default class GotService {
   }
   
   async getAllHouses() {
-    const houses = await this.getResource(`/houses/`);
-    return houses.map(this._transformCharacter);
+    const res = await this.getResource(`/houses/`);
+    return res.map(this._transformCharacter);
   }
 
   async getHouse(id) {
@@ -43,24 +43,27 @@ export default class GotService {
     return this._transformCharacter(house); 
   }
 
-  _transformCharacter(char) {
+  isSet(data) {
+    if (data) {
+      return data
+    } else {
+      return 'NO DATA!!!';
+    }
+  }
 
-    const nm = char.name === '' ? char.name = 'NO DATA!!!' : char.name;      
-      
-    const gnd = char.gender === '' ? char.gender = 'NO DATA!!!' : char.gender; 
+  _exId(item) {
+    const idRegExpon = /\/([0-9]*)$/;
+    return item.url.match(idRegExpon)[1];
+  }
 
-    const brn = char.born === '' ? char.born = 'NO DATA!!!' : char.born;  
-
-    const dd = char.died === '' ? char.died = 'NO DATA!!!' : char.died;
-        
-    const cult = char.culture === '' ? char.culture = 'NO DATA!!!' : char.culture;        
-
+  _transformCharacter = (char) => {
     return {
-      name: nm,
-      gender: gnd,
-      born: brn,
-      died: dd,
-      culture: cult      
+      id: this._exId(char),
+      name: this.isSet(char.name),
+      gender: this.isSet(char.gender),
+      born: this.isSet(char.born),
+      died: this.isSet(char.died),
+      culture: this.isSet(char.culture)
     }
   }
 
