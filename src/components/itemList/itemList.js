@@ -2,13 +2,22 @@ import React, {Component} from 'react';
 import './itemList.css';
 import gotService from '../../services/gotService';
 import Spinner from '../spinner';
+import ErrorMessage from '../errorMessage';
 
 export default class ItemList extends Component {
 
     gotService = new gotService();
 
     state = {
-        charList: null
+        charList: null,
+        error: false
+    }
+
+    onError = (err) => {
+        this.setState({
+            error: true,
+            loading: false
+        })
     }
 
     componentDidMount() {
@@ -18,6 +27,7 @@ export default class ItemList extends Component {
                     charList
                 })
             })
+            .catch(this.onError)
             // this.foo.bar = 0;
     }
 
@@ -36,16 +46,19 @@ export default class ItemList extends Component {
 
     render() {
 
-        const {charList} = this.state;
+        const {charList, error} = this.state;
 
         if (!charList) {
             return <Spinner/>
         }
 
+        const errorMessage = error ? <ErrorMessage/> : null;
+
         const items = this.renderItems(charList);       
 
         return (
             <ul className="item-list list-group">
+                {errorMessage}
                 {items}
             </ul>
         );

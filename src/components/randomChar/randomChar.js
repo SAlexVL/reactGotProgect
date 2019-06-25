@@ -9,7 +9,8 @@ export default class RandomChar extends Component {
     gotService = new gotService();
     state = {
         char: {},
-        loading: true
+        loading: true,
+        error: false
     }
 
     componentDidMount() {

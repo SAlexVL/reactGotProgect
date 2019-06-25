@@ -31,7 +31,7 @@ export default class CharacterPage extends Component {
     return(
       <Row>
         <Col md='6'>
-            <ItemList onCharSelected={this.onCharSelected} />
+            <ItemList onCharSelected={(id) => this.onCharSelected(id)} />
         </Col>
         <Col md='6'>
             <CharDetails charId={this.state.selectedChar}/>
