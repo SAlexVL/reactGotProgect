@@ -60,11 +60,11 @@ export default class ItemDetails extends Component {
 
     render() {
 
-        if (!this.state.item) {
-            return <span className='select-error'>Please select a charracter</span>
-        }
-
         const { loading, error, item } = this.state;
+
+        if (!(item || error)) {
+            return <span className='select-error'>{this.props.title}</span>
+        }    
 
         const errorMessage = error ? <ErrorMessage  err={error}/> : null;
 

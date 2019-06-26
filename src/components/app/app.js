@@ -6,8 +6,6 @@ import ErrorMessage from '../errorMessage';
 import CharacterPage from '../pages/characterPage';
 import BookPage from '../pages/booksPage';
 import HousePage from '../pages/housePage';
-import ItemList from '../itemList';
-import ItemDetails from '../itemDetails';
 import gotService from '../../services/gotService';
 
 import './app.css';
@@ -61,29 +59,7 @@ export default class App extends Component {
                         </Col>
                     </Row>
                     <CharacterPage/>
-                    {/* <Row>
-                        <Col md='6'>
-                            <ItemList 
-                            onItemSelected={(id) => this.onItemSelected(id)}
-                            getData={this.gotService.getAllBooks} 
-                            renderItem={(item) => item.name}/>
-                        </Col>
-                        <Col md='6'>
-                            <ItemDetails itemId={this.state.selectedChar}/>
-                        </Col>
-                    </Row> */}
                     <BookPage/>
-                    {/* <Row>
-                        <Col md='6'>
-                            <ItemList 
-                            onItemSelected={(id) => this.onItemSelected(id)} 
-                            getData={this.gotService.getAllHouses}
-                            renderItem={(item) => item.name}/>
-                        </Col>
-                        <Col md='6'>
-                            <ItemDetails itemId={this.state.selectedChar}/>
-                        </Col>
-                    </Row> */}
                     <HousePage/>
                 </Container>
             </>

@@ -43,6 +43,7 @@ export default class BookPage extends Component {
       <ItemDetails
         itemId={this.state.selectedBook}
         getData={this.gotService.getBook}
+        title="Please select a book"
         >
         <Field field="numberOfPages" label="Pages"/>
         <Field field="publisher" label="Publisher"/>
