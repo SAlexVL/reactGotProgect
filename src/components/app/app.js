@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Col, Row, Button, Container} from 'reactstrap';
 import Header from '../header';
-import RandomChar from '../randomChar';
+// import RandomItem from '../randomItem';
+import RandomPage from '../pages/randomPage';
 import ErrorMessage from '../errorMessage';
 import CharacterPage from '../pages/characterPage';
 import BookPage from '../pages/booksPage';
@@ -15,7 +16,7 @@ export default class App extends Component {
     gotService = new gotService();
 
     state = {
-        showRandomChar: true,
+        // showRandomItem: true,
         error: false
     };
 
@@ -26,16 +27,16 @@ export default class App extends Component {
         })
     }
 
-    toggleRadomChar = () => {
-        this.setState((state) => {
-            return {
-                showRandomChar: !state.showRandomChar
-            }
-        });
-    };
+    // toggleRadomItem = () => {
+    //     this.setState((state) => {
+    //         return {
+    //             showRandomItem: !state.showRandomItem
+    //         }
+    //     });
+    // };
 
     render() {
-        const char = this.state.showRandomChar ? <RandomChar/> : null;
+        // const item = this.state.showRandomItem ? <RandomItem/> : null;
 
         if(this.state.error) {
             return <ErrorMessage/>
@@ -49,13 +50,14 @@ export default class App extends Component {
                 <Container>
                     <Row>
                         <Col lg={{size: 5, offset: 0}}>
-                            {char}
+                            <RandomPage/>
+                            {/* {item}
                             <Button 
                                 color="primary" 
                                 size="lg"
-                                onClick={this.toggleRadomChar}
+                                onClick={this.toggleRadomItem}
                             >Toggle block
-                            </Button>
+                            </Button> */}
                         </Col>
                     </Row>
                     <CharacterPage/>
