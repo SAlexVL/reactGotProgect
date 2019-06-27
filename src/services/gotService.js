@@ -64,7 +64,7 @@ export default class GotService {
       born: this.isSet(char.born),
       died: this.isSet(char.died),
       culture: this.isSet(char.culture)
-    }
+    };
   }
 
   _transformHouse = (house) => {
@@ -76,7 +76,7 @@ export default class GotService {
       titles: this.isSet(house.titles),
       overlord: this.isSet(house.overlord),
       ancestralWeapons: this.isSet(house.ancestralWeapons)
-    }
+    };
   }
 
   _transformBook = (book) => {
@@ -86,7 +86,7 @@ export default class GotService {
       numberOfPages: this.isSet(book.numberOfPages),
       publiser: this.isSet(book.publiser),
       released: this.isSet(book.released)
-    }
+    };
   }
 
 }
