@@ -45,18 +45,16 @@ export default class App extends Component {
                                 <RandomPage/>
                             </Col>
                         </Row>
+                                <Route path='/' exact component={() => <h1>Welcome to GOT DB</h1>}/>
+                                <Route path='/characters' component={CharacterPage}/>
+                                <Route path='/houses' component={HousePage}/>
+                                <Route path='/books' exact component={BookPage}/>
+                                <Route path='/books/:id' render={
+                                    ({match}) => {
+                                        const {id} = match.params;
 
-                        <Route path='/' exact component={() => <h1>Welcome to GOT DB</h1>}/>
-                        <Route path='/characters' component={CharacterPage}/>
-                        <Route path='/houses' component={HousePage}/>
-                        <Route path='/books' exact component={BookPage}/>
-                        <Route path='/books/:id' render={
-                            ({match}) => {
-                                const {id} = match.params;
-
-                            return <BooksItem bookId={id}/>}
-                        }/>
-
+                                    return <BooksItem bookId={id}/>}
+                                }/>
                     </Container>
                 </div>                 
             </Router>

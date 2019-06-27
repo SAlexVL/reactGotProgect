@@ -67,8 +67,9 @@ export default class ItemDetails extends Component {
         }    
 
         const errorMessage = error ? <ErrorMessage  err={error}/> : null;
+        const spinner = loading ? <Spinner/> : null;
 
-        const content = loading ? <Spinner/> : (
+        const content = !(loading || error) ? (
                 <div className="char-details rounded">
                     <h4>{item.name}</h4>
                         <ul className="list-group list-group-flush">
@@ -79,25 +80,14 @@ export default class ItemDetails extends Component {
                             }
                         </ul>
                 </div>            
-        );
+        ) : null;
 
         return (
             <div className="char-details rounded">
                 {errorMessage}
+                {spinner}
                 {content}
             </div>
         );
     }
 }
-
-// const ViewDetails = ({char}) => {
-//     const {name, gender, born, died, culture} = char;
-//     return (
-//         <div className="char-details rounded">
-//             <h4>{name}</h4>
-//                 <ul className="list-group list-group-flush">
-//                     {this.props.children}
-//                 </ul>
-//         </div>
-//     )
-// }
