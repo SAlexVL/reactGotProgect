@@ -54,16 +54,16 @@ export default class ItemDetails extends Component {
     render() {
 
         const { loading, error, item } = this.state;
-
-        // if (!(item || error)) {
-        //     return <span className='select-error'>{this.props.title}</span>
-        // }    
-
-        const selectErr = !(item || error) ? <span className='select-error'>{this.props.title}</span> : null;
-
-        const errorMessage = error ? <ErrorMessage  err={error}/> : null;
+        // let selectErr = <span className='select-error'>{this.props.title}</span>;
         const spinner = loading ? <Spinner/> : null;
+        if (!(item || error)) {
+            return (
+                <span className='select-error'>{this.props.title}{spinner}</span>
+            )
+        }
 
+        
+        const errorMessage = error ? <ErrorMessage  err={error}/> : null;
         const content = !(loading || error) && item ? (
                 <div className="char-details rounded">
                     <h4>{item.name}</h4>
@@ -79,11 +79,10 @@ export default class ItemDetails extends Component {
 
         return (
             <div className="char-details rounded">
-                {selectErr}
                 {errorMessage}
                 {spinner}
                 {content}
             </div>
-        );
+        )
     }
 }
