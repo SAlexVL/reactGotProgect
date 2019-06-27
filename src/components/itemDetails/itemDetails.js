@@ -7,7 +7,7 @@ export default class ItemDetails extends Component {
 
     state = {
         item: null,
-        loading: true,
+        loading: false,
         error: false
     }
 
@@ -28,13 +28,6 @@ export default class ItemDetails extends Component {
         }
     }
 
-    // onError = (err) => {
-    //     this.setState({
-    //         error: true,
-    //         loading: false
-    //     })
-    // }
-
     updateItem() {
         const {itemId, getData} = this.props;
         if (!itemId) {
@@ -53,7 +46,7 @@ export default class ItemDetails extends Component {
             .catch((err) => {
                 this.setState({
                   error: err,
-                  loaded: false
+                  loading: false
                 })
               });
     }
@@ -62,14 +55,16 @@ export default class ItemDetails extends Component {
 
         const { loading, error, item } = this.state;
 
-        if (!(item || error)) {
-            return <span className='select-error'>{this.props.title}</span>
-        }    
+        // if (!(item || error)) {
+        //     return <span className='select-error'>{this.props.title}</span>
+        // }    
+
+        const selectErr = !(item || error) ? <span className='select-error'>{this.props.title}</span> : null;
 
         const errorMessage = error ? <ErrorMessage  err={error}/> : null;
         const spinner = loading ? <Spinner/> : null;
 
-        const content = !(loading || error) ? (
+        const content = !(loading || error) && item ? (
                 <div className="char-details rounded">
                     <h4>{item.name}</h4>
                         <ul className="list-group list-group-flush">
@@ -84,6 +79,7 @@ export default class ItemDetails extends Component {
 
         return (
             <div className="char-details rounded">
+                {selectErr}
                 {errorMessage}
                 {spinner}
                 {content}
