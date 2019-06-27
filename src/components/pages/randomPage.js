@@ -4,7 +4,6 @@ import Field from "../field";
 import gotService from '../../services/gotService';
 import {Button} from 'reactstrap';
 
-
 export default class RandomPage extends Component {
 
   gotService = new gotService();

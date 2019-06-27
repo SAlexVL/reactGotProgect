@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Col, Row, Button, Container} from 'reactstrap';
+import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
-// import RandomItem from '../randomItem';
 import RandomPage from '../pages/randomPage';
 import ErrorMessage from '../errorMessage';
 import CharacterPage from '../pages/characterPage';
@@ -16,7 +15,6 @@ export default class App extends Component {
     gotService = new gotService();
 
     state = {
-        // showRandomItem: true,
         error: false
     };
 
@@ -27,16 +25,7 @@ export default class App extends Component {
         })
     }
 
-    // toggleRadomItem = () => {
-    //     this.setState((state) => {
-    //         return {
-    //             showRandomItem: !state.showRandomItem
-    //         }
-    //     });
-    // };
-
     render() {
-        // const item = this.state.showRandomItem ? <RandomItem/> : null;
 
         if(this.state.error) {
             return <ErrorMessage/>
@@ -51,13 +40,6 @@ export default class App extends Component {
                     <Row>
                         <Col lg={{size: 5, offset: 0}}>
                             <RandomPage/>
-                            {/* {item}
-                            <Button 
-                                color="primary" 
-                                size="lg"
-                                onClick={this.toggleRadomItem}
-                            >Toggle block
-                            </Button> */}
                         </Col>
                     </Row>
                     <CharacterPage/>

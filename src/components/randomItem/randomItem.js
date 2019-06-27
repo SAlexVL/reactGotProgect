@@ -3,6 +3,7 @@ import './randomItem.css';
 import gotService from '../../services/gotService';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
+import PropTypes from 'prop-types';
 
 export default class RandomItem extends Component {
 
@@ -15,7 +16,7 @@ export default class RandomItem extends Component {
 
     componentDidMount() {
         this.updateItem();
-        this.timerId = setInterval(this.updateItem, 1500);
+        this.timerId = setInterval(this.updateItem, this.props.interval);
     }
 
     componentWillUnmount() {
@@ -67,8 +68,6 @@ export default class RandomItem extends Component {
             </div>
           ) : null;
 
-        // const content = !(loading || error) ? <View char={char}/> : null;
- 
         return (
             <div className="random-block rounded">
                 {errorMessage}
@@ -79,29 +78,10 @@ export default class RandomItem extends Component {
     }
 }
 
-// const View = ({char}) => {
-//     const {name, gender, born, died, culture} = char;
-//     return (
-//         <>
-//             <h4>Random Character: {name}</h4>
-//             <ul className="list-group list-group-flush">
-//                 <li className="list-group-item d-flex justify-content-between">
-//                     <span className="term">Gender </span>
-//                     <span>{gender}</span>
-//                 </li>
-//                 <li className="list-group-item d-flex justify-content-between">
-//                     <span className="term">Born </span>
-//                     <span>{born}</span>
-//                 </li>
-//                 <li className="list-group-item d-flex justify-content-between">
-//                     <span className="term">Died </span>
-//                     <span>{died}</span>
-//                 </li>
-//                 <li className="list-group-item d-flex justify-content-between">
-//                     <span className="term">Culture </span>
-//                     <span>{culture}</span>
-//                 </li>
-//             </ul>
-//         </>
-//     )
-// }
+RandomItem.defaultProps = {
+    interval: 15000
+}
+
+RandomItem.propTypes = {
+    interval: PropTypes.number
+}
